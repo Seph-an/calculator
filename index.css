@@ -1,0 +1,31 @@
+.calcContainer{
+    padding: 10px;
+    border: 1px solid green;
+    width: 50%;
+    background: pink;
+}
+
+.display{
+    outline: none;
+    height: 30px;
+}
+
+.keypad{
+    padding: 10px;
+    border: 1px solid red;
+    display: flex;
+    gap: 5px;
+}
+
+.btn{
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
