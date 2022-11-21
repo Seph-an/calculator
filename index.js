@@ -15,16 +15,16 @@ Bugs to address
 4. Overflow when floats are involved, results partaining to       *
    floats should be rounded off to 2 d.p
 
-5. The bug that occurs when working with DEL after operator       **T
+5. The bug that occurs when working with DEL after operator       √
    is set and a new num being typed in after DEL is typed
    actually this is common bug after operate is called
    if operate has been called, new values being typed
    should be independent of the initial chain
 
-6. Bug when two operators are clicked in a row before any         *L
+6. Bug when two operators are clicked in a row before any         L*
    num is clicked
 
-7. Buggiest of bugs: Doing a series of operations and then 
+7. Buggiest of bugs: Doing a series of operations and then        √
    clicking equal, then tapping any number followed by an
    operator yields an inexplicable bug, suddenly there are
    decimal points.
@@ -95,10 +95,6 @@ function btnClicked(e) {
     noDelete = "true";
     clear = "false";
 
-    // clickedBtn.style.boxShadow = "";
-
-    //action performed when btn clicked is an operator ("+","-","x","÷")
-
     if (num1 !== "") {
       const result = operate(num1, operator, disp);
       disp = result.toString();
@@ -120,7 +116,7 @@ function btnClicked(e) {
     } else {
       num1 = disp;
       operator = bt;
-      tmp = ""; //new addition
+      tmp = "";
     }
   } else {
     if (bt !== "DEL") {
@@ -135,11 +131,6 @@ function btnClicked(e) {
     //******* +/- btn that adds -ve sign to num on display or removes it
     //use unshift("-")
     if (bt !== "=" && bt !== "AC" && bt !== "DEL") {
-      // if (bt !== "." && bt !== "=" && bt !== "AC" && bt !== "DEL") {
-      //action performed when btn clicked is not an operator
-      //but is a number btwn 0-9
-      //
-      //if operator count is less than 1
       console.log("clear is:", clear);
       const dotChecker = disp.includes(".");
 
@@ -183,7 +174,6 @@ function btnClicked(e) {
             disp = tmp;
           } else {
             if (numBtnCounter == 1) {
-              //why isn't this effective after "=" is clicked?
               console.log("numBtnCounter is 1");
               console.log("numbtncounter", numBtnCounter);
 
@@ -231,18 +221,6 @@ function btnClicked(e) {
           clear = "true";
           numBtnCounter = 0;
           operatorCounter = 0;
-
-          console.log("---------------------------------------");
-          console.log("equal clicked");
-          console.log("clear is:", clear);
-          console.log("display is:", disp);
-          console.log("num1 is:", num1);
-          console.log("num2 is:", num2);
-          console.log("operatorCounter is:", operatorCounter);
-          console.log("numBtnCounter is:", numBtnCounter);
-          console.log("tmp is:", tmp);
-          console.log("operator is:", operator);
-          console.log("---------------------------------------");
         }
       } else if (bt == "AC") {
         num1 = "";
@@ -256,14 +234,27 @@ function btnClicked(e) {
         if (noDelete == "false") {
           if (disp.length == 1) {
             disp = "0";
+            tmp = "";
             numBtnCounter = 0;
           } else {
             let inDisp = [...disp];
             inDisp.pop();
             let inDispNew = inDisp.toString().replace(/,/g, "");
+            tmp = inDispNew;
             disp = inDispNew;
           }
         }
+        console.log("------------------DEL---------------------");
+        console.log("equal clicked");
+        console.log("clear is:", clear);
+        console.log("display is:", disp);
+        console.log("num1 is:", num1);
+        console.log("num2 is:", num2);
+        console.log("operatorCounter is:", operatorCounter);
+        console.log("numBtnCounter is:", numBtnCounter);
+        console.log("tmp is:", tmp);
+        console.log("operator is:", operator);
+        console.log("--------------------DEL-------------------");
       }
       // else {
       //   //action performed when btn clicked is "."
