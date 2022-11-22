@@ -4,7 +4,6 @@ const buttons = [...items];
 buttons.forEach((button, i) => {
   const btn = button.textContent;
   button.style.order = i + 1;
-  //looking into else ifs using ternary operators
   //------------------------------------------------------------------
   if ((btn == "x") | (btn == "+") | (btn == "-") | (btn == "÷")) {
     button.classList.add("btn-operator");
@@ -16,13 +15,8 @@ buttons.forEach((button, i) => {
   } else if (btn == ".") {
     button.style.order = 16;
   } else if ((btn == "AC") | (btn == "DEL")) {
-    // button.style.color = "#1E1E1E";
     button.style.color = "#160C55";
-    // button.style.backgroundColor = "#bfbfbf";
-
-    // button.style.backgroundColor = "#999999";
   } else if (btn == "=") {
-    //figure out a way of adding multiple styles at ago
     button.style.order = 18;
     button.style.width = "127px";
     button.style.backgroundColor = "#1E1E1E";
@@ -54,17 +48,3 @@ buttons.forEach((button, i) => {
   // console.log("btn is", btn);
   button.addEventListener("click", btnClicked);
 });
-
-/*
-        console.log("------------------DEL---------------------");
-        console.log("equal clicked");
-        console.log("clear is:", clear);
-        console.log("display is:", disp);
-        console.log("num1 is:", num1);
-        console.log("num2 is:", num2);
-        console.log("operatorCounter is:", operatorCounter);
-        console.log("numBtnCounter is:", numBtnCounter);
-        console.log("tmp is:", tmp);
-        console.log("operator is:", operator);
-        console.log("--------------------DEL-------------------");
-*/
