@@ -61,14 +61,13 @@ let keypads = ["AC", "DEL", "+", "-", "x", "÷", ".", "="];
 for (let i = 0; i < 10; i++) {
   keypads.push(i);
 }
-console.log("keypads", keypads);
+
 let btns = "";
 keypads.map((btn) => {
   btns += `
     <button class = "btn">${btn}</button>
 `;
 });
-console.log("mapped btns", btns);
 
 keypad.innerHTML = btns;
 
@@ -82,18 +81,17 @@ let operatorCounter = 0;
 let numBtnCounter = 0;
 displayValue.textContent = disp;
 let noDelete;
-let clear = "false";
+// let clear = "false";
 
 function btnClicked(e) {
   const bt = e.currentTarget.textContent;
   const clickedBtn = e.currentTarget;
-  // const bt = clickedBtn;
 
   if ((bt == "÷") | (bt == "+") | (bt == "-") | (bt == "x")) {
     operatorCounter++;
     clickedBtn.style.backgroundColor = "#e6e6e7";
     noDelete = "true";
-    clear = "false";
+    // clear = "false";
 
     if (num1 !== "") {
       const result = operate(num1, operator, disp);
@@ -102,17 +100,6 @@ function btnClicked(e) {
       // num2 = "";
       tmp = "";
       operator = bt;
-      console.log("---------------------------------------");
-      console.log("operator clicked twice & beyond clicked");
-      console.log("clear is:", clear);
-      console.log("display is:", disp);
-      console.log("num1 is:", num1);
-      console.log("num2 is:", num2);
-      console.log("operatorCounter is:", operatorCounter);
-      console.log("numBtnCounter is:", numBtnCounter);
-      console.log("tmp is:", tmp);
-      console.log("operator is:", operator);
-      console.log("---------------------------------------");
     } else {
       num1 = disp;
       operator = bt;
@@ -131,7 +118,7 @@ function btnClicked(e) {
     //******* +/- btn that adds -ve sign to num on display or removes it
     //use unshift("-")
     if (bt !== "=" && bt !== "AC" && bt !== "DEL") {
-      console.log("clear is:", clear);
+      // console.log("clear is:", clear);
       const dotChecker = disp.includes(".");
 
       noDelete = "false";
@@ -159,14 +146,11 @@ function btnClicked(e) {
               disp = "";
               tmp += bt;
               disp = tmp;
-              // tmp = "";
             }
           }
         }
       } else {
         if (num1 == "") {
-          console.log("numBtnCounter in num1 empty");
-          console.log("numbtncounter", numBtnCounter);
           if (operatorCounter > 1) {
             num1 = disp;
             disp = "";
@@ -174,51 +158,39 @@ function btnClicked(e) {
             disp = tmp;
           } else {
             if (numBtnCounter == 1) {
-              console.log("numBtnCounter is 1");
-              console.log("numbtncounter", numBtnCounter);
-
               disp = "";
               disp += bt;
-              // tmp += bt;
-              // disp = tmp;
             } else {
-              console.log("numBtnCounter is not one");
-              console.log("numbtncounter", numBtnCounter);
-
               disp += bt;
             }
           }
         } else {
-          console.log("numBtnCounter in num1 not empty");
-          console.log("numbtncounter", numBtnCounter);
-
           if (num2 == "") {
             disp = "";
             tmp += bt;
             disp = tmp;
-            //do not make tmp empty here
           }
         }
-        // getKeypad();
+        // disp = getKeypad(
+        //   num1,
+        //   operatorCounter,
+        //   disp,
+        //   tmp,
+        //   bt,
+        //   numBtnCounter,
+        //   num2
+        // );
       }
     } else {
-      //action performed when btn clicked is not an operator
-      //& is not a number btwn 0-9; either "=" or "."
       if (bt == "=") {
-        //action performed when btn clicked is "="
-        noDelete = "true"; //bug alert damn!
-
+        noDelete = "true";
         if (num1 !== "") {
-          // num2 = disp;
           const result = operate(num1, operator, disp);
-
           disp = result.toString();
-
           num1 = "";
-          // num2 = "";
           tmp = "";
           operator = "";
-          clear = "true";
+          // clear = "true";
           numBtnCounter = 0;
           operatorCounter = 0;
         }
@@ -244,28 +216,7 @@ function btnClicked(e) {
             disp = inDispNew;
           }
         }
-        console.log("------------------DEL---------------------");
-        console.log("equal clicked");
-        console.log("clear is:", clear);
-        console.log("display is:", disp);
-        console.log("num1 is:", num1);
-        console.log("num2 is:", num2);
-        console.log("operatorCounter is:", operatorCounter);
-        console.log("numBtnCounter is:", numBtnCounter);
-        console.log("tmp is:", tmp);
-        console.log("operator is:", operator);
-        console.log("--------------------DEL-------------------");
       }
-      // else {
-      //   //action performed when btn clicked is "."
-      //   // numBtnCounter++;
-
-      //   const dotChecker = disp.includes(".");
-      //   if (!dotChecker) {
-      //     //adress the small error on starting
-      //     disp += bt;
-      //   }
-      // }
     }
   }
   displayValue.textContent = disp;
@@ -279,7 +230,13 @@ function btnClicked(e) {
   console.log("---------------overall----------------------");
 }
 //----------------------------------------------------------
-function getKeypad() {
+function getDisp(disp, tmp, bt) {
+  disp = "";
+  tmp += bt;
+  disp = tmp;
+  return { tmp, disp };
+}
+function getKeypad(num1, operatorCounter, disp, tmp, bt, numBtnCounter, num2) {
   if (num1 == "") {
     if (operatorCounter > 1) {
       num1 = disp;
@@ -302,6 +259,8 @@ function getKeypad() {
       // tmp = "";
     }
   }
+  console.log("returned disp is", disp);
+  return disp;
 }
 //
 function operate(num1, operator, num2) {
@@ -310,17 +269,14 @@ function operate(num1, operator, num2) {
   let result = "";
   if (operator == "+") {
     result = sum(num1, num2);
-    // sum(num1, num2);
   } else if (operator == "-") {
     result = subtract(num1, num2);
-    // subtract(num1, num2);
   } else if (operator == "x") {
     result = multiply(num1, num2);
-    // multiply(num1, num2);
   } else {
     result = divide(num1, num2);
-    // divide(num1, num2);
   }
+  result = Math.round((result + Number.EPSILON) * 10000) / 10000;
   return result;
 }
 //------------------------------------------------------

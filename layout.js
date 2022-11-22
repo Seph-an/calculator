@@ -1,38 +1,3 @@
-// const container = document.querySelector("#container");
-
-// const header = document.createElement("header");
-// header.classList.add("header");
-
-// const calcContainer = document.createElement("div");
-// calcContainer.classList.add("calcContainer");
-
-// const display = document.createElement("div");
-// display.classList.add("display");
-// const displayValue = document.createElement("div");
-// displayValue.classList.add("displayValue");
-
-// const keypad = document.createElement("div");
-// keypad.classList.add("keypad");
-
-// container.append(header, calcContainer);
-// display.appendChild(displayValue);
-// calcContainer.append(display, keypad);
-
-// let keypads = ["AC", "DEL", "+", "-", "x", "÷", ".", "="];
-// for (let i = 0; i < 10; i++) {
-//   keypads.push(i);
-// }
-// console.log("keypads", keypads);
-// let btns = "";
-// keypads.map((btn) => {
-//   btns += `
-//     <button class = "btn">${btn}</button>
-// `;
-// });
-// console.log("mapped btns", btns);
-
-// keypad.innerHTML = btns;
-
 const items = document.querySelectorAll(".btn");
 const buttons = [...items];
 
@@ -89,3 +54,17 @@ buttons.forEach((button, i) => {
   // console.log("btn is", btn);
   button.addEventListener("click", btnClicked);
 });
+
+/*
+        console.log("------------------DEL---------------------");
+        console.log("equal clicked");
+        console.log("clear is:", clear);
+        console.log("display is:", disp);
+        console.log("num1 is:", num1);
+        console.log("num2 is:", num2);
+        console.log("operatorCounter is:", operatorCounter);
+        console.log("numBtnCounter is:", numBtnCounter);
+        console.log("tmp is:", tmp);
+        console.log("operator is:", operator);
+        console.log("--------------------DEL-------------------");
+*/
